@@ -26,7 +26,7 @@ export const PROGRAM_ID = new web3.PublicKey(
 export const TREASURY_WALLET = import.meta.env.VITE_TREASURY_WALLET;
 
 export const createProgram = (provider: AnchorProvider) =>
-  new Program(idl as unknown as Idl, PROGRAM_ID, provider);
+  new Program(idl as unknown as Idl, provider);
 
 export const deriveStakePda = (
   creator: web3.PublicKey,
