@@ -1,0 +1,12 @@
+node_modules
+target
+.anchor
+.DS_Store
+dist
+.env
+.env.local
+coverage
+Cargo.lock
+app/.env
+app/.env.local
+

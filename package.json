@@ -1,0 +1,38 @@
+{
+  "name": "skillstake",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "app"
+  ],
+  "overrides": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "@types/react": "18.3.29",
+    "@types/react-dom": "18.3.7"
+  },
+  "scripts": {
+    "anchor:build": "anchor build --no-idl",
+    "anchor:test": "anchor build --no-idl && anchor test --skip-build",
+    "app:dev": "npm --workspace app run dev",
+    "app:build": "npm --workspace app run build",
+    "app:preview": "npm --workspace app run preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@coral-xyz/anchor": "^0.30.1",
+    "@types/chai": "^5.0.1",
+    "@types/mocha": "^10.0.10",
+    "@types/react": "18.3.29",
+    "@types/react-dom": "18.3.7",
+    "chai": "^5.1.2",
+    "mocha": "^10.7.3",
+    "prettier": "^3.3.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "address": "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkgMQhgwdnB6m",
+  "metadata": {
+    "name": "commitment_stake",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Commitment staking Anchor program"
+  },
+  "version": "0.1.0",
+  "name": "commitment_stake",
+  "instructions": [
+    {
+      "name": "createStake",
+      "accounts": [
+        { "name": "stakeAccount", "isMut": true, "isSigner": false },
+        { "name": "creator", "isMut": true, "isSigner": true },
+        { "name": "treasury", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "stakeId", "type": "u64" },
+        { "name": "goal", "type": "string" },
+        { "name": "deadline", "type": "i64" },
+        { "name": "validator", "type": "publicKey" },
+        { "name": "amount", "type": "u64" }
+      ]
+    },
+    {
+      "name": "completeStake",
+      "accounts": [
+        { "name": "stakeAccount", "isMut": true, "isSigner": false },
+        { "name": "creator", "isMut": true, "isSigner": false },
+        { "name": "validator", "isMut": false, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": []
+    },
+    {
+      "name": "failStake",
+      "accounts": [
+        { "name": "stakeAccount", "isMut": true, "isSigner": false },
+        { "name": "creator", "isMut": true, "isSigner": false },
+        { "name": "validator", "isMut": false, "isSigner": true },
+        { "name": "treasury", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "stakeAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "creator", "type": "publicKey" },
+          { "name": "validator", "type": "publicKey" },
+          { "name": "treasury", "type": "publicKey" },
+          { "name": "stakeId", "type": "u64" },
+          { "name": "deadline", "type": "i64" },
+          { "name": "amount", "type": "u64" },
+          { "name": "createdAt", "type": "i64" },
+          { "name": "status", "type": "u8" },
+          { "name": "bump", "type": "u8" },
+          { "name": "goal", "type": "string" }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    { "code": 6000, "name": "goalRequired", "msg": "A goal is required." },
+    { "code": 6001, "name": "goalTooLong", "msg": "The goal is too long." },
+    {
+      "code": 6002,
+      "name": "deadlineMustBeInFuture",
+      "msg": "The deadline must be in the future."
+    },
+    {
+      "code": 6003,
+      "name": "deadlinePassed",
+      "msg": "The deadline has already passed."
+    },
+    {
+      "code": 6004,
+      "name": "amountMustBePositive",
+      "msg": "The staked amount must be positive."
+    },
+    {
+      "code": 6005,
+      "name": "stakeAlreadyResolved",
+      "msg": "This stake has already been resolved."
+    }
+  ]
+}
