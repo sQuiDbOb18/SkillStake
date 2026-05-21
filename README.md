@@ -117,7 +117,7 @@ VITE_NETWORK=devnet
 VITE_BASE_PATH=/
 ```
 
-Run the frontend:
+Run the frontend locally:
 
 ```bash
 npm run app:dev
@@ -128,6 +128,42 @@ Build the frontend:
 ```bash
 npm run app:build
 ```
+
+### Docker
+
+Build and serve the frontend in a container:
+
+```bash
+docker build --tag skillstake-frontend ./app
+```
+
+Run the container on port 8080:
+
+```bash
+docker run --rm -p 8080:80 skillstake-frontend
+```
+
+Open `http://localhost:8080` in your browser.
+
+If you want to build with custom env values, pass build args:
+
+```bash
+docker build \
+  --build-arg VITE_PROGRAM_ID=YOUR_PROGRAM_ID \
+  --build-arg VITE_SOLANA_RPC_URL=https://api.devnet.solana.com \
+  --build-arg VITE_TREASURY_WALLET=YOUR_TREASURY_PUBKEY \
+  --build-arg VITE_NETWORK=devnet \
+  --build-arg VITE_BASE_PATH=/ \
+  --tag skillstake-frontend ./app
+```
+
+Use Docker Compose to build and run the app with a single command:
+
+```bash
+docker compose up --build
+```
+
+Then open `http://localhost:8080`.
 
 ## Deploying the Solana program
 
